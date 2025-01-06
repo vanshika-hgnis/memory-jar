@@ -1,0 +1,9 @@
+Project Title:Supabase
+Database Password:AnanyaVanshika
+
+
+Done. Now run:
+
+  cd memory-jar
+  npm install
+  npm run dev
