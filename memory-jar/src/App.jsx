@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Dashboard from "./Dashboard";
+import LandingPage from "./LandingPage";
 import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabaseUrl, supabaseAnonKey } from "/SupabaseClient.js";
-
+import Button from "./components/Button";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 function App() {
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
+  </BrowserRouter>;
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
   };
@@ -36,7 +45,15 @@ function App() {
   }, []);
 
   if (!session) {
-    return <button onClick={signUp}>Sign in with Google</button>;
+    return (
+      <>
+        <LandingPage />
+        <Button onClick={signUp} variant="filled" size="mid">
+          {" "}
+          Sign in with Google{" "}
+        </Button>
+      </>
+    );
   } else {
     return (
       <div>
